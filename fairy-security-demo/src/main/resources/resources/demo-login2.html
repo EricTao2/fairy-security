@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>demo-login</title>
+</head>
+<body>
+	<h1>短信o登录页面</h1>
+	<form action="/authentication/phone" method="post">
+	<p>登录</p>
+	<table>
+		<tr>
+			<td>手机号:</td>
+			<td><input name="phone" type="text" value="18873020899"/></td>
+		</tr>
+		<tr>
+			<td>验证码:</td>
+			<td>
+				<input name="smsCode" type="password"/>
+				<a href="/code/sms?phone=18873020899">发送验证码</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input name="remember-me" type="checkbox"/>记住我
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="submit" value="确定">
+			</td>
+		
+		</tr>
+	</table>
+	</form>
+</body>
+</html>
