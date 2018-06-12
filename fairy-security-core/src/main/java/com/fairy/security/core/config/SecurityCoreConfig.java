@@ -8,6 +8,5 @@ import com.fairy.security.core.properties.SecurityProperties;
 @Configuration
 @EnableConfigurationProperties(SecurityProperties.class)
 public class SecurityCoreConfig {
-
 		
 }
