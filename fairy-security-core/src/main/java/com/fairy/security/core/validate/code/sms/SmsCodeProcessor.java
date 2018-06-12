@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -20,6 +21,7 @@ import com.fairy.security.core.validate.impl.AbstractValidateCodeProcessor;
  * @author Administrator
  *
  */
+@Component
 public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode> implements ValidateCodeProcessor {
 
 	@Autowired

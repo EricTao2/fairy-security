@@ -17,11 +17,13 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 import com.fairy.security.browser.authentication.FairyAuthenticationFailureHandler;
 import com.fairy.security.browser.authentication.FairyAuthenticationSuccessHandler;
+import com.fairy.security.core.config.SmsCodeAuthenticationSecurityConfig;
 import com.fairy.security.core.properties.SecurityProperties;
+import com.fairy.security.core.validate.code.SmsCodeFilter;
 import com.fairy.security.core.validate.code.ValidateCodeFilter;
 
 @Configuration
-public class SecurityBrowserConfig extends WebSecurityConfigurerAdapter {
+public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private SecurityProperties securityProperties;
@@ -32,9 +34,13 @@ public class SecurityBrowserConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private ValidateCodeFilter validateCodeFilter;
 	@Autowired
+	private SmsCodeFilter smsCodeFilter;
+	@Autowired
 	private DataSource dataSource;
 	@Autowired
 	private UserDetailsService userDetailsService;
+	@Autowired
+	private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
@@ -51,6 +57,7 @@ public class SecurityBrowserConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		validateCodeFilter.setAuthenticationFailureHandler(fairyAuthenticationFailureHandler);
+		
 		http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
 			.formLogin()
 				.loginPage("/authentication/require")
@@ -69,7 +76,8 @@ public class SecurityBrowserConfig extends WebSecurityConfigurerAdapter {
 					"/code/*")
 			.permitAll()
 			.and().authorizeRequests().anyRequest().authenticated()
-			.and().csrf().disable();
+			.and().csrf().disable()
+			.apply(smsCodeAuthenticationSecurityConfig);
 		
 	}
 }

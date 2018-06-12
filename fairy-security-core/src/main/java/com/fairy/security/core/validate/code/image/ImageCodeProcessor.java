@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import com.fairy.security.core.validate.code.ValidateCodeProcessor;
@@ -16,6 +17,7 @@ import com.fairy.security.core.validate.impl.AbstractValidateCodeProcessor;
  * @author Administrator
  *
  */
+@Component
 public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode> implements ValidateCodeProcessor {
 
 

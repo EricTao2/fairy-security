@@ -39,13 +39,13 @@ public class SmsCodeFilter extends OncePerRequestFilter implements InitializingB
 	private SecurityProperties securityProperties;
 	
 	private AntPathMatcher antPathMatcher = new AntPathMatcher();
-	@Autowired
-	private Map<String, ValidateCodeProcessor> validateCodeProcessors;
+	/*@Autowired
+	private Map<String, ValidateCodeProcessor> validateCodeProcessors;*/
 	
 	@Override
 	public void afterPropertiesSet() throws ServletException {
 		super.afterPropertiesSet();
-		String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getImage().getUrl(), ",");
+		String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getSms().getUrl(), ",");
 		for (String configUrl : configUrls) {
 			urls.add(configUrl);
 		}
@@ -74,7 +74,7 @@ public class SmsCodeFilter extends OncePerRequestFilter implements InitializingB
 
 	private void validate(ServletWebRequest request) throws ServletRequestBindingException {
 		
-		ValidateCode imageCode = (ImageCode)sessionStrategy.getAttribute(request, ValidateCodeProcessor.SESSION_KEY_PREFIX + "SMS");
+		ValidateCode imageCode = (ValidateCode)sessionStrategy.getAttribute(request, ValidateCodeProcessor.SESSION_KEY_PREFIX + "SMS");
 		String codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(), "smsCode");
 		if (StringUtils.isBlank(codeInRequest)) {
 			throw new ValidateCodeException("验证码不能为空");

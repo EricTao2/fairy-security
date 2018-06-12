@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
 
 import com.fairy.security.core.authentication.phone.SmsCodeAuthenticationFilter;
 import com.fairy.security.core.authentication.phone.SmsCodeAuthenticationProvider;
@@ -19,6 +21,7 @@ import com.fairy.security.core.authentication.phone.SmsCodeAuthenticationProvide
  * @author Administrator
  *
  */
+@Component
 public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 	
 	@Autowired
@@ -39,6 +42,7 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
 		SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
 		smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);
 	
-		http.authenticationProvider(smsCodeAuthenticationProvider);
+		http.authenticationProvider(smsCodeAuthenticationProvider)
+			.addFilterAfter(smsCodeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 }

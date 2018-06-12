@@ -8,13 +8,14 @@ import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.validate.code.ValidateCodeGenerator;
 
-
+@Component
 public class ImageCodeGenerator implements ValidateCodeGenerator {
 
 	@Autowired
