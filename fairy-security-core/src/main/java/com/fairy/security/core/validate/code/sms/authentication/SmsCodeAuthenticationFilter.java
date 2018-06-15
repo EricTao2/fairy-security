@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fairy.security.core.authentication.phone;
+package com.fairy.security.core.validate.code.sms.authentication;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +14,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
+import com.fairy.security.core.authentication.common.SecurityConstants;
+
 /**
+ * SMS登录验证的Filter，并由SmsCodeAuthenticationSecurityConfig类配置
  * @author Administrator
  *
  */
@@ -31,7 +34,7 @@ public class SmsCodeAuthenticationFilter  extends AbstractAuthenticationProcessi
 		// ===================================================================================================
 
 		public SmsCodeAuthenticationFilter() {
-			super(new AntPathRequestMatcher("/authentication/phone", "POST"));
+			super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_SMS_LOGIN_PROCESSING_URL, "POST"));
 		}
 
 		// ~ Methods

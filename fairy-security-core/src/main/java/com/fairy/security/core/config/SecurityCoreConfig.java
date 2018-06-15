@@ -5,6 +5,11 @@ import org.springframework.context.annotation.Configuration;
 
 import com.fairy.security.core.properties.SecurityProperties;
 
+/**
+ * 注入properties配置
+ * @author Administrator
+ *
+ */
 @Configuration
 @EnableConfigurationProperties(SecurityProperties.class)
 public class SecurityCoreConfig {

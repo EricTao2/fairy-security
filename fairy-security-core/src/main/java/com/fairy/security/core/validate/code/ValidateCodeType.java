@@ -6,6 +6,7 @@ package com.fairy.security.core.validate.code;
 import com.fairy.security.core.authentication.common.SecurityConstants;
 
 /**
+ * 验证码类型枚举
  * @author Administrator
  *
  */

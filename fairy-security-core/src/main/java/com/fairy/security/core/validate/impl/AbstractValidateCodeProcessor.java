@@ -10,6 +10,7 @@ import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
+import com.fairy.security.core.authentication.common.SecurityConstants;
 import com.fairy.security.core.validate.code.ValidateCode;
 import com.fairy.security.core.validate.code.ValidateCodeException;
 import com.fairy.security.core.validate.code.ValidateCodeGenerator;
@@ -17,6 +18,17 @@ import com.fairy.security.core.validate.code.ValidateCodeProcessor;
 import com.fairy.security.core.validate.code.ValidateCodeType;
 import com.fairy.security.core.validate.code.image.ImageCode;
 
+/**
+ * 抽象的验证码处理器，根据验证码生成器调用验证码的生成方法，生成验证码存入sessio，并返回验证码。
+ * 验证码生成器的查找逻辑为，找到request的url，如"/code/{type}"。
+ * 然后查找名为{type} + "CodeGenerator"的验证码生成器。
+ * 生成验证码后将验证码存入session，存入的变量名参看具体方法save(ServletWebRequest request, T validateCode)
+ * 提供了一个抽象方法，send。由具体实现类实现发送验证码的方法。
+ * 且实现了默认的校验方法。
+ * @author Administrator
+ *
+ * @param <T>
+ */
 public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> implements ValidateCodeProcessor {
 
 	private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
@@ -57,7 +69,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
 	 * @throws
 	 */
 	private String getProcessorType(ServletWebRequest request) {
-		return StringUtils.substringAfter(request.getRequest().getRequestURI(), "/code/");
+		return StringUtils.substringAfter(request.getRequest().getRequestURI(), SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX);
 	}
 
 	/**

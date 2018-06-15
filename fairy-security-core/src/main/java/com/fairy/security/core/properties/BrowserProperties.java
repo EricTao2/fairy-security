@@ -1,8 +1,10 @@
 package com.fairy.security.core.properties;
 
+import com.fairy.security.core.authentication.common.SecurityConstants;
+
 public class BrowserProperties {
 	
-	private String loginPage = "/default-login.html";
+	private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
 
 	private LoginType loginType = LoginType.JSON;
 		

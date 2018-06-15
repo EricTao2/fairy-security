@@ -2,6 +2,11 @@ package com.fairy.security.core.validate.code;
 
 import java.time.LocalDateTime;
 
+/**
+ * 验证码基类
+ * @author Administrator
+ *
+ */
 public class ValidateCode {
 
     // 验证码

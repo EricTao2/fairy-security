@@ -14,6 +14,7 @@ import com.fairy.security.core.validate.code.ValidateCodeProcessor;
 import com.fairy.security.core.validate.impl.AbstractValidateCodeProcessor;
 
 /**
+ * 图片验证码处理器
  * @author Administrator
  *
  */

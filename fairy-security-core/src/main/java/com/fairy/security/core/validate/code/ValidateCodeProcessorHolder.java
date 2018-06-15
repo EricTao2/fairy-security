@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * 验证码处理器持有类，持有所有验证码处理器
  * @author Administrator
  *
  */

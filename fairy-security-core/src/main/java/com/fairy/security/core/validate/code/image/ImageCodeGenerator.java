@@ -15,10 +15,15 @@ import org.springframework.web.context.request.ServletWebRequest;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.validate.code.ValidateCodeGenerator;
 
-@Component
+/**
+ * 图片验证码生成器
+ * @author Administrator
+ *
+ */
+//该类在ValidateCodeBeanConfig里条件化配置，不需要@Component注解
 public class ImageCodeGenerator implements ValidateCodeGenerator {
 
-	@Autowired
+	
 	private SecurityProperties securityProperties;
 	
 	private Random random = new Random();

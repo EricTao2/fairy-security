@@ -1,16 +1,7 @@
 package com.fairy.security.core.validate.code.image;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.time.LocalDateTime;
-import java.util.Random;
-
-import javax.imageio.ImageIO;
-
 import com.fairy.security.core.validate.code.ValidateCode;
 
 public class ImageCode extends ValidateCode {

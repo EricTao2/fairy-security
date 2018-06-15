@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fairy.security.core.authentication.phone;
+package com.fairy.security.core.validate.code.sms.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
+ * SMS登录验证的Provider，并由SmsCodeAuthenticationSecurityConfig类配置
  * @author Administrator
  *
  */

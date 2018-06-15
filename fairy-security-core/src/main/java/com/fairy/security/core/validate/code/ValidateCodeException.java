@@ -2,6 +2,11 @@ package com.fairy.security.core.validate.code;
 
 import org.springframework.security.core.AuthenticationException;
 
+/**
+ * 验证码异常类
+ * @author Administrator
+ *
+ */
 public class ValidateCodeException extends AuthenticationException {
 
 	/**

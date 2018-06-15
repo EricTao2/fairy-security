@@ -1,11 +1,13 @@
 package com.fairy.security.core.properties;
 
+import com.fairy.security.core.authentication.common.SecurityConstants;
+
 public class SmsCodeProperties {
 	private int length = 4;
 	
 	private int expireIn = 600;
 	
-	private String url = "/authentication/phone";
+	private String url = SecurityConstants.DEFAULT_SMS_LOGIN_PROCESSING_URL;
 
 
 

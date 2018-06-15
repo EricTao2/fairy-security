@@ -23,6 +23,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.fairy.security.core.properties.SecurityProperties;
 
+/**
+ * 验证码过滤器，负责校验验证码
+ * @author Administrator
+ *
+ */
 @Component
 public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
 
@@ -37,9 +42,10 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 	private AntPathMatcher antPathMatcher = new AntPathMatcher();
 	
 	private Map<String, ValidateCodeType> urlMap = new HashMap<>();
-	/*@Autowired
-	private Map<String, ValidateCodeProcessor> validateCodeProcessors;*/
 	
+	/**
+	 * 解析Properties配置参数，添加需要拦截并校验验证码的url
+	 */
 	@Override
 	public void afterPropertiesSet() throws ServletException {
 		super.afterPropertiesSet();
@@ -50,7 +56,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 	/**
 	 * 
 	 * @Title: addUrlToMap   
-	 * @Description: 添加对应验证码类型的拦截url  
+	 * @Description: 根据验证码类型，添加对应的拦截url  
 	 * @param: @param urlString
 	 * @param: @param type      
 	 * @return: void      
@@ -64,7 +70,9 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 			}
 		}
 	}
-	
+	/**
+	 * 查找对应验证码处理器，并调用validate方法校验。验证通过则调用后续过滤器链
+	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {

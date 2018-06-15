@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fairy.security.core.authentication.phone;
+package com.fairy.security.core.validate.code.sms.authentication;
 
 import java.util.Collection;
 
@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
 /**
+ * SMS登录验证的Token，供SmsCodeAuthenticationFilter使用
  * @author Administrator
  *
  */

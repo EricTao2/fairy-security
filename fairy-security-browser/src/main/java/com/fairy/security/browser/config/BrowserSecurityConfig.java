@@ -14,33 +14,34 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 import com.fairy.security.browser.authentication.FairyAuthenticationFailureHandler;
 import com.fairy.security.browser.authentication.FairyAuthenticationSuccessHandler;
-import com.fairy.security.core.config.SmsCodeAuthenticationSecurityConfig;
+import com.fairy.security.core.AbstractChannelSecurityConfig;
+import com.fairy.security.core.authentication.common.SecurityConstants;
 import com.fairy.security.core.properties.SecurityProperties;
-import com.fairy.security.core.validate.code.SmsCodeFilter;
 import com.fairy.security.core.validate.code.ValidateCodeFilter;
+import com.fairy.security.core.validate.code.config.ValidateCodeSecurityConfig;
+import com.fairy.security.core.validate.code.sms.SmsCodeAuthenticationSecurityConfig;
 
 @Configuration
-public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
+public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 
 	@Autowired
 	private SecurityProperties securityProperties;
-	@Autowired
-	private FairyAuthenticationSuccessHandler fairyAuthenticationSuccessHandler;
-	@Autowired
-	private FairyAuthenticationFailureHandler fairyAuthenticationFailureHandler;
-	@Autowired
-	private ValidateCodeFilter validateCodeFilter;
-	@Autowired
-	private SmsCodeFilter smsCodeFilter;
 	@Autowired
 	private DataSource dataSource;
 	@Autowired
 	private UserDetailsService userDetailsService;
 	@Autowired
 	private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+
+	@Autowired
+	private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+	@Autowired
+	private SpringSocialConfigurer fairySocialConfig;
+	
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
@@ -50,20 +51,19 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 	public PersistentTokenRepository persistentTokenRepository() {
 		JdbcTokenRepositoryImpl jdbcTokenRepositoryImpl = new JdbcTokenRepositoryImpl();
 		jdbcTokenRepositoryImpl.setDataSource(dataSource);
-//		jdbcTokenRepositoryImpl.setCreateTableOnStartup(true);
+//		jdbcTokenRepositoryImpl.setCreateTableOnStartup(true); //创建表
 		return jdbcTokenRepositoryImpl;
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		validateCodeFilter.setAuthenticationFailureHandler(fairyAuthenticationFailureHandler);
+		applyPasswordAuthenticationConfig(http);
 		
-		http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
-			.formLogin()
-				.loginPage("/authentication/require")
-				.loginProcessingUrl("/authentication/form")
-				.successHandler(fairyAuthenticationSuccessHandler)
-				.failureHandler(fairyAuthenticationFailureHandler)
+		http.apply(smsCodeAuthenticationSecurityConfig)
+				.and()
+			.apply(validateCodeSecurityConfig)
+				.and()
+			.apply(fairySocialConfig)
 				.and()
 			.rememberMe()
 				.tokenRepository(persistentTokenRepository())
@@ -71,13 +71,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 				.userDetailsService(userDetailsService)
 				.and()
 			.authorizeRequests()
-			.antMatchers("/authentication/require", 
+			.antMatchers(SecurityConstants.DEFAULT_FORM_LOGIN_URL, 
 					securityProperties.getBrowser().getLoginPage(),
-					"/code/*")
+					SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*")
 			.permitAll()
-			.and().authorizeRequests().anyRequest().authenticated()
-			.and().csrf().disable()
-			.apply(smsCodeAuthenticationSecurityConfig);
+				.and().authorizeRequests().anyRequest().authenticated()
+				.and().csrf().disable();
+			
 		
 	}
 }

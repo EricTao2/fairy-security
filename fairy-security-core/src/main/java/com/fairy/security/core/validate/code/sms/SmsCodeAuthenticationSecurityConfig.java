@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fairy.security.core.config;
+package com.fairy.security.core.validate.code.sms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,10 +14,11 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
-import com.fairy.security.core.authentication.phone.SmsCodeAuthenticationFilter;
-import com.fairy.security.core.authentication.phone.SmsCodeAuthenticationProvider;
+import com.fairy.security.core.validate.code.sms.authentication.SmsCodeAuthenticationFilter;
+import com.fairy.security.core.validate.code.sms.authentication.SmsCodeAuthenticationProvider;
 
 /**
+ * SMS验证登录的过滤器配置
  * @author Administrator
  *
  */
