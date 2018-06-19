@@ -46,7 +46,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
         Graphics g = buffImg.getGraphics();
         //Graphics2D g = buffImg.createGraphics();
         // 设置背景色
-        Color color = getRandColor(200, 250);
+        Color color = getRandBackgroundColor();
         g.setColor(color);
         g.fillRect(0, 0, width, height);
         
@@ -77,14 +77,14 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
             buffImg.setRGB(x, y, random.nextInt(255));
         }
 
-        //扭曲图片(背景线条和噪点)
+        //扭曲图片
         shear(g, width, height, color);
         
         String str1 = randomStr(codeCount);// 得到随机字符
         code = str1;
         for (int i = 0; i < codeCount; i++) {
             String strRand = str1.substring(i, i + 1);
-            g.setColor(getRandColor(1, 255));
+            g.setColor(getRandColor(0, 100, -122, 122, -157, 157));
             // g.drawString(a,x,y);
             // a为要画出来的东西，x和y表示要画的东西最左侧字符的基线位于此图形上下文坐标系的 (x, y) 位置处
             
@@ -97,7 +97,31 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
 		return imageCode;
 	}
 	
-	// 得到随机颜色
+	/**   
+	 * @Title: getRandBackgroundColor   
+	 * @Description: TODO(这里用一句话描述这个方法的作用)   
+	 * @param: @return      
+	 * @return: Color      
+	 * @throws   
+	 */
+	private Color getRandBackgroundColor() {
+		int one = random.nextInt(11);
+		switch (one) {
+		case 1 : return new Color(25, 202, 173);
+		case 2 : return new Color(140, 199, 181);
+		case 3 : return new Color(160 , 238 , 225);
+		case 4 : return new Color(190 , 231 , 233);
+		case 5 : return new Color(190, 237 , 199);
+		case 6 : return new Color(214, 213 , 183);
+		case 7 : return new Color(209 , 186 , 116);
+		case 8 : return new Color(230, 206 , 172);
+		case 9 : return new Color(236, 173 , 158);
+		case 10 : return new Color(244 , 96 , 108);
+		}
+		return null;
+	}
+
+	// 得到随机颜色RGB
     private Color getRandColor(int fc, int bc) {// 给定范围获得随机颜色
         if (fc > 255)
             fc = 255;
@@ -107,6 +131,35 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
         int g = fc + random.nextInt(bc - fc);
         int b = fc + random.nextInt(bc - fc);
         return new Color(r, g, b);
+    }
+    
+	// 得到随机颜色,通过YUV
+    private Color getRandColor(int ymin, int ymax, int umin, int umax, int vmin, int vmax) {// 给定范围获得随机颜色
+        if (ymin > 255) ymin = 255;
+        if (ymax > 255) ymax = 255;
+        if (ymin < 0) ymin = 0;
+        if (ymax < 0) ymax = 0;
+        if (umin > 122) umin = 122;
+        if (umax > 122) umax = 122;
+        if (umin < -122) umin = -122;
+        if (umax < -122) umax = -122;
+        if (vmin > 157) vmin = 157;
+        if (vmax > 157) vmax = 157;
+        if (vmin < -157) vmin = -157;
+        if (vmax < -157) vmax = -157;
+        int y = ymin + random.nextInt(ymax - ymin + 1);
+        int u = umin + random.nextInt(umax - umin + 1);
+        int v = vmin + random.nextInt(vmax - vmin + 1);
+        int R = (int)(y+1.14*v);
+        int G = (int)(y-0.394*u-0.581*v);
+        int B = (int)(y+2.028*u);
+        if (R<0) R=0;
+        if (G<0) G=0;
+        if (B<0) B=0;
+        if (R>255) R=255;
+        if (G>255) G=255;
+        if (B>255) B=255;
+        return new Color(R, G, B);
     }
 
  // 得到随机字符

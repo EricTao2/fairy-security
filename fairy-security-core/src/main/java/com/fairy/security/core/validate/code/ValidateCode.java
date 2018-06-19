@@ -1,5 +1,6 @@
 package com.fairy.security.core.validate.code;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -7,9 +8,14 @@ import java.time.LocalDateTime;
  * @author Administrator
  *
  */
-public class ValidateCode {
+public class ValidateCode implements Serializable {
 
-    // 验证码
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8148935204517291498L;
+
+	// 验证码
     private String code = null;
     
     private LocalDateTime expireTime = LocalDateTime.now().plusSeconds(300);

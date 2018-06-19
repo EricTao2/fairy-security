@@ -14,7 +14,7 @@ import com.fairy.security.core.authentication.common.SecurityConstants;
 /**
  * 提供默认的表单登录功能与处理配置。需要配置AuthenticationSuccessHandler
  * 和AuthenticationFailureHandler的成功失败处理类
- * 和SecurityConstants定义的登录跳转url，登录处理url
+ * 和{@link SecurityConstants}定义的登录跳转url，登录处理url
  * @author Administrator
  *
  */

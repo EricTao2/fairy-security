@@ -14,10 +14,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import com.fairy.security.browser.authentication.FairyAuthenticationFailureHandler;
 import com.fairy.security.browser.authentication.FairyAuthenticationSuccessHandler;
+import com.fairy.security.browser.session.FairyExpiredSessionStrategy;
 import com.fairy.security.core.AbstractChannelSecurityConfig;
 import com.fairy.security.core.authentication.common.SecurityConstants;
 import com.fairy.security.core.properties.SecurityProperties;
@@ -41,7 +44,10 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 	private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 	@Autowired
 	private SpringSocialConfigurer fairySocialConfig;
-	
+	@Autowired
+	private InvalidSessionStrategy invalidSessionStrategy;
+	@Autowired
+	private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
 	@Bean
 	public PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
@@ -70,10 +76,19 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 				.tokenValiditySeconds(securityProperties.getBrowser().getRememberMeSeconds())
 				.userDetailsService(userDetailsService)
 				.and()
+			.sessionManagement()
+				.invalidSessionStrategy(invalidSessionStrategy)
+				.invalidSessionUrl(securityProperties.getBrowser().getSession().getSessionInvalidUrl()) //session过期后跳转url
+				.maximumSessions(securityProperties.getBrowser().getSession().getMaximumSessions()) //同一账号session的最大数量
+				//.maxSessionsPreventsLogin(true) //阻止超过最大登录数之后的登录
+				.expiredSessionStrategy(sessionInformationExpiredStrategy) //session丢失后的策略
+				.and()
+				.and()
 			.authorizeRequests()
-			.antMatchers(SecurityConstants.DEFAULT_FORM_LOGIN_URL, 
+				.antMatchers(SecurityConstants.DEFAULT_FORM_LOGIN_URL, 
 					securityProperties.getBrowser().getLoginPage(),
-					SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*")
+					SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
+					securityProperties.getBrowser().getSession().getSessionInvalidUrl())
 			.permitAll()
 				.and().authorizeRequests().anyRequest().authenticated()
 				.and().csrf().disable();

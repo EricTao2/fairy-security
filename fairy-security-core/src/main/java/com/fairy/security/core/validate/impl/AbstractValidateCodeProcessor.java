@@ -69,7 +69,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
 	 * @throws
 	 */
 	private String getProcessorType(ServletWebRequest request) {
-		return StringUtils.substringAfter(request.getRequest().getRequestURI(), SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX);
+		return StringUtils.substringAfter(request.getRequest().getRequestURI(), SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/");
 	}
 
 	/**
@@ -82,7 +82,8 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
 	 * @throws
 	 */
 	private void save(ServletWebRequest request, T validateCode) {
-		sessionStrategy.setAttribute(request, getCodeSessionKey(), validateCode);
+		ValidateCode code = new ValidateCode(validateCode.getCode(), validateCode.getExpireTime());
+		sessionStrategy.setAttribute(request, getCodeSessionKey(), code);
 	}
 	
 	

@@ -6,7 +6,11 @@ import com.fairy.security.core.validate.code.ValidateCode;
 
 public class ImageCode extends ValidateCode {
 
-    // 验证码图片Buffer
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5279440935013444577L;
+	// 验证码图片Buffer
     private BufferedImage buffImg = null;
     
     

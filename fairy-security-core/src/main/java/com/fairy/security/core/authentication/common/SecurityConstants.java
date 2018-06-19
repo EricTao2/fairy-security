@@ -25,4 +25,6 @@ public interface SecurityConstants {
 	String DEFAULT_FORM_LOGIN_PROCESSING_URL = "/authentication/form";
 	
 	String DEFAULT_SMS_LOGIN_PROCESSING_URL = "/authentication/phone";
+	
+	String DEFAULT_SESSION_INVALID_URL = "/fairy-session-invalid.html";
 }
