@@ -1,4 +1,4 @@
-package com.fairy.security.browser.authentication;
+package com.fairy.security.app.authentication;
 
 import java.io.IOException;
 
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import com.fairy.security.core.properties.LoginType;
 import com.fairy.security.core.properties.SecurityProperties;
-import com.fairy.security.core.support.SimpleResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -45,7 +44,7 @@ public class FairyAuthenticationFailureHandler extends SimpleUrlAuthenticationFa
 		response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 		if (LoginType.JSON.equals(loginType)) {
 			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(exception.getMessage())));
+			response.getWriter().write(objectMapper.writeValueAsString(exception.getMessage()));
 
 		} else {
 			super.onAuthenticationFailure(request, response, exception);

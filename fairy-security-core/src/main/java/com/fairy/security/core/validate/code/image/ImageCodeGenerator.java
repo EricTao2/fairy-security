@@ -121,7 +121,16 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
 		return null;
 	}
 
-	// 得到随机颜色RGB
+	/**
+	 * 
+	 * @Title: getRandColor   
+	 * @Description: 使用rgb模式获取颜色  
+	 * @param: @param fc
+	 * @param: @param bc
+	 * @param: @return      
+	 * @return: Color      
+	 * @throws
+	 */
     private Color getRandColor(int fc, int bc) {// 给定范围获得随机颜色
         if (fc > 255)
             fc = 255;
@@ -133,7 +142,20 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
         return new Color(r, g, b);
     }
     
-	// 得到随机颜色,通过YUV
+    /**
+	 * 
+	 * @Title: getRandColor   
+	 * @Description: 使用yuv模式生成随机颜色   
+	 * @param: @param ymin
+	 * @param: @param ymax
+	 * @param: @param umin
+	 * @param: @param umax
+	 * @param: @param vmin
+	 * @param: @param vmax
+	 * @param: @return      
+	 * @return: Color      
+	 * @throws
+	 */
     private Color getRandColor(int ymin, int ymax, int umin, int umax, int vmin, int vmax) {// 给定范围获得随机颜色
         if (ymin > 255) ymin = 255;
         if (ymax > 255) ymax = 255;

@@ -36,7 +36,7 @@ public class FairyUserDetailService implements UserDetailsService, SocialUserDet
 	
 	private SocialUserDetails buildUser(String userName) {
 		String password = passwordEncoder.encode("123123");
-		SocialUser user = new SocialUser(userName, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+		SocialUser user = new SocialUser(userName, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
 		return user;
 	}
 

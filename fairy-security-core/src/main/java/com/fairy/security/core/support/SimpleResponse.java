@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fairy.security.browser.bean;
+package com.fairy.security.core.support;
 
 /**
  * 

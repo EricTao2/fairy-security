@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fairy.security.browser.bean.SimpleResponse;
 import com.fairy.security.core.authentication.common.SecurityConstants;
 import com.fairy.security.core.properties.SecurityProperties;
+import com.fairy.security.core.support.SimpleResponse;
 
 @RestController
 public class BrowserSecurityController {

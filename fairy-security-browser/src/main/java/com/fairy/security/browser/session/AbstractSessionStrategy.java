@@ -17,7 +17,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.util.UrlUtils;
 import org.springframework.util.Assert;
 
-import com.fairy.security.browser.bean.SimpleResponse;
+import com.fairy.security.core.support.SimpleResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**

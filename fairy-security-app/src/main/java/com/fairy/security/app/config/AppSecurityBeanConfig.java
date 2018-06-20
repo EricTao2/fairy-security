@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fairy.security.browser.config;
+package com.fairy.security.app.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -15,11 +15,8 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
-import com.fairy.security.browser.authentication.FairyAuthenticationFailureHandler;
-import com.fairy.security.browser.authentication.FairyAuthenticationSuccessHandler;
-import com.fairy.security.browser.logout.FairyLogoutSuccessHandler;
-import com.fairy.security.browser.session.FairyExpiredSessionStrategy;
-import com.fairy.security.browser.session.FairyInvalidSessionStrategy;
+import com.fairy.security.app.authentication.FairyAuthenticationFailureHandler;
+import com.fairy.security.app.authentication.FairyAuthenticationSuccessHandler;
 import com.fairy.security.core.properties.SecurityProperties;
 
 /**
@@ -27,28 +24,10 @@ import com.fairy.security.core.properties.SecurityProperties;
  *
  */
 @Configuration
-public class BrowserSecurityBeanConfig {
+public class AppSecurityBeanConfig {
 
 	@Autowired
 	private SecurityProperties securityProperties;
-	
-	@Bean
-	@ConditionalOnMissingBean(InvalidSessionStrategy.class)
-	public InvalidSessionStrategy invalidSessionStrategy(){
-		return new FairyInvalidSessionStrategy(securityProperties.getBrowser().getSession().getSessionInvalidUrl());
-	}
-	
-	@Bean
-	@ConditionalOnMissingBean(SessionInformationExpiredStrategy.class)
-	public SessionInformationExpiredStrategy sessionInformationExpiredStrategy(){
-		return new FairyExpiredSessionStrategy(securityProperties.getBrowser().getSession().getSessionInvalidUrl());
-	}
-	
-	@Bean
-	@ConditionalOnMissingBean(LogoutSuccessHandler.class)
-	public LogoutSuccessHandler logoutSuccessHandler(){
-		return new FairyLogoutSuccessHandler(securityProperties.getBrowser().getLogoutUrl());
-	}
 	
 	
 	@Bean

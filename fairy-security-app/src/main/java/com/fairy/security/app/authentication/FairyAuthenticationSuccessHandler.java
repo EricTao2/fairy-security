@@ -1,4 +1,4 @@
-package com.fairy.security.browser.authentication;
+package com.fairy.security.app.authentication;
 
 import java.io.IOException;
 

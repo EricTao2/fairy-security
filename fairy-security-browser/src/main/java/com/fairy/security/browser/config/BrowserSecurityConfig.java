@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.session.InvalidSessionStrategy;
@@ -21,8 +22,8 @@ import org.springframework.social.security.SpringSocialConfigurer;
 import com.fairy.security.browser.authentication.FairyAuthenticationFailureHandler;
 import com.fairy.security.browser.authentication.FairyAuthenticationSuccessHandler;
 import com.fairy.security.browser.session.FairyExpiredSessionStrategy;
-import com.fairy.security.core.AbstractChannelSecurityConfig;
 import com.fairy.security.core.authentication.common.SecurityConstants;
+import com.fairy.security.core.config.AbstractChannelSecurityConfig;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.validate.code.ValidateCodeFilter;
 import com.fairy.security.core.validate.code.config.ValidateCodeSecurityConfig;
@@ -48,10 +49,9 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 	private InvalidSessionStrategy invalidSessionStrategy;
 	@Autowired
 	private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
-	@Bean
-	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
+	@Autowired
+	private LogoutSuccessHandler logoutSuccessHandler;
+	
 	
 	@Bean
 	public PersistentTokenRepository persistentTokenRepository() {
@@ -84,11 +84,17 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 				.expiredSessionStrategy(sessionInformationExpiredStrategy) //session丢失后的策略
 				.and()
 				.and()
+			.logout()
+				.logoutUrl("/fairy-logout")
+				.logoutSuccessHandler(logoutSuccessHandler)
+				.deleteCookies("JSESSIONID")
+				.and()
 			.authorizeRequests()
 				.antMatchers(SecurityConstants.DEFAULT_FORM_LOGIN_URL, 
-					securityProperties.getBrowser().getLoginPage(),
 					SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-					securityProperties.getBrowser().getSession().getSessionInvalidUrl())
+					securityProperties.getBrowser().getLoginPage(),
+					securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
+					securityProperties.getBrowser().getLogoutUrl())
 			.permitAll()
 				.and().authorizeRequests().anyRequest().authenticated()
 				.and().csrf().disable();

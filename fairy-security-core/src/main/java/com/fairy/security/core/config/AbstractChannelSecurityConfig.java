@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fairy.security.core;
+package com.fairy.security.core.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
