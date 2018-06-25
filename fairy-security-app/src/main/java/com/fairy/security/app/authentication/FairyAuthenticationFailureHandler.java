@@ -19,36 +19,23 @@ import com.fairy.security.core.properties.LoginType;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+@Component
 public class FairyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	
-	private ObjectMapper objectMapper = new ObjectMapper();
-	
-	private LoginType loginType;
-	
-
-	/**
-	 * 
-	 */
-	public FairyAuthenticationFailureHandler(String defaultFailureUrl, LoginType loginType) {
-		super(defaultFailureUrl);
-		this.loginType = loginType;
-	}
+	@Autowired
+	private ObjectMapper objectMapper;
+	@Autowired
+	private SecurityProperties securityProperties;
 	
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		logger.info("登录失败");
 		response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-		if (LoginType.JSON.equals(loginType)) {
-			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().write(objectMapper.writeValueAsString(exception.getMessage()));
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().write(objectMapper.writeValueAsString(exception.getMessage()));
 
-		} else {
-			super.onAuthenticationFailure(request, response, exception);
-		}
 
 	}
 

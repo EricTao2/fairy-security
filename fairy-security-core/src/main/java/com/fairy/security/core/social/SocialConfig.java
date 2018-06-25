@@ -32,12 +32,24 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	@Autowired
 	private SecurityProperties securityProperties;
 	
+	/**
+	 * 配置本地用户信息与服务提供商的对应表
+	 * 设置为以"fairy_"开头的表名
+	 */
 	@Override
 	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
 		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
 		repository.setTablePrefix("fairy_");
 		return repository; 
 	}
+	/**
+	 * 
+	 * @Title: fairySpringSocialConfigurer   
+	 * @Description: 配置：处理第三方登录url的前缀。默认为"/auth"  
+	 * @param: @return      
+	 * @return: SpringSocialConfigurer      
+	 * @throws
+	 */
 	@Bean
 	public SpringSocialConfigurer fairySpringSocialConfigurer(){
 		String filterProcessesUrl = securityProperties.getSocial().getFilterProcessesUrl();

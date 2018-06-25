@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
+ * QQ接口的实现，实现了从qq互联服务提供商获取qq用户信息
  * @author Administrator
  *
  */
@@ -38,9 +39,8 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 		String url = String.format(URL_GET_OPENID, accessToken);
 		String result = getRestTemplate().getForObject(url, String.class);
 		
-		System.out.println(result);
 		
-		this.openId = StringUtils.substringBetween(result, "\"openid\":", "}");
+		this.openId = StringUtils.substringBetween(result, "\"openid\":\"", "\"}");
 	}
 
 	@Override
@@ -49,9 +49,10 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 		
 		String result = getRestTemplate().getForObject(url, String.class);
 		
-		System.out.println(result);
 		try {
-			return objectMapper.readValue(result, QQUserInfo.class);
+			QQUserInfo userInfo = objectMapper.readValue(result, QQUserInfo.class);
+			userInfo.setOpenId(openId);
+			return userInfo;
 		} catch (Exception e) {
 			throw new RuntimeException("获取用户信息失败");
 		}

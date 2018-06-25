@@ -27,7 +27,7 @@ import com.fairy.security.core.config.AbstractChannelSecurityConfig;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.validate.code.ValidateCodeFilter;
 import com.fairy.security.core.validate.code.config.ValidateCodeSecurityConfig;
-import com.fairy.security.core.validate.code.sms.SmsCodeAuthenticationSecurityConfig;
+import com.fairy.security.core.validate.code.sms.authentication.SmsCodeAuthenticationSecurityConfig;
 
 @Configuration
 public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {

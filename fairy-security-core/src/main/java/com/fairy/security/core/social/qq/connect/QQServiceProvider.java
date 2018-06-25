@@ -11,6 +11,11 @@ import com.fairy.security.core.social.qq.api.QQ;
 import com.fairy.security.core.social.qq.api.QQImpl;
 
 /**
+ * 由OAuth2Operations和Api组成
+ * OAuth2Operations负责和服务提供商进行OAuth认证的过程,SpringSocial里的默认实现是OAuth2Template
+ * 这里使用修改过默认OAuth2Template类的子类,QOAuth2Template类
+ * Api负责从服务提供商获取用户信息，这里使用QQImpl类
+ * 该类是QQConnectionFactory的组成部分
  * @author Administrator
  *
  */
@@ -25,7 +30,8 @@ public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
 	 * @param oauth2Operations
 	 */
 	public QQServiceProvider(String appId, String appSecret) {
-		super(new OAuth2Template(appId, appSecret, URL_AUTHORIZE, URL_ACCESSTOKEN));
+		super(new QQOAuth2Template(appId, appSecret, URL_AUTHORIZE, URL_ACCESSTOKEN));
+		this.appId = appId;
 	}
 
 	

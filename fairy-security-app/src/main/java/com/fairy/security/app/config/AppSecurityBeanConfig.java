@@ -30,18 +30,7 @@ public class AppSecurityBeanConfig {
 	private SecurityProperties securityProperties;
 	
 	
-	@Bean
-	@ConditionalOnMissingBean(SavedRequestAwareAuthenticationSuccessHandler.class)
-	public SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler(){
-		return new FairyAuthenticationSuccessHandler(securityProperties.getBrowser().getLoginType());
-	}
-	
-	@Bean
-	@ConditionalOnMissingBean(SimpleUrlAuthenticationFailureHandler.class)
-	public SimpleUrlAuthenticationFailureHandler simpleUrlAuthenticationFailureHandler(){
-		return new FairyAuthenticationFailureHandler(securityProperties.getBrowser().getLoginPage(),
-				securityProperties.getBrowser().getLoginType());
-	}
+
 	
 
 }

@@ -11,6 +11,8 @@ import com.fairy.security.core.social.qq.api.QQ;
 import com.fairy.security.core.social.qq.api.QQUserInfo;
 
 /**
+ * QQ适配器，将认证服务器返回的用户信息转化成springsocial里的用户
+ * 该类QQConnectionFactory的组成部分
  * @author Administrator
  *
  */

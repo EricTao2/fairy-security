@@ -11,16 +11,16 @@
   </properties>
   
   <dependencies>
-   <!--  <dependency>
+   <dependency>
       <groupId>com.fairy.security</groupId>
   	  <artifactId>fairy-security-browser</artifactId>
   	  <version>${fairy.security.version}</version>
-    </dependency> -->
-    <dependency>
+    </dependency>
+    <!-- <dependency>
       <groupId>com.fairy.security</groupId>
   	  <artifactId>fairy-security-app</artifactId>
   	  <version>${fairy.security.version}</version>
-    </dependency>
+    </dependency> -->
   </dependencies>
   
   <build>

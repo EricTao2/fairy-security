@@ -4,6 +4,7 @@
 package com.fairy.security.core.social.qq.api;
 
 /**
+ * QQ用户信息的封装类
  * @author Administrator
  *
  */
@@ -31,6 +32,10 @@ public class QQUserInfo {
 	private String yellow_vip_level;//	黄钻等级
 	private String level;//	黄钻等级
 	private String is_yellow_year_vip;// 标识是否为年费黄钻用户（0：不是； 1：是）
+	private String is_lost; //不知道，官网没有文档
+	private String province;
+	private String city;
+	private String year;
 	public String getRet() {
 		return ret;
 	}
@@ -126,6 +131,30 @@ public class QQUserInfo {
 	}
 	public void setAppId(String appId) {
 		this.appId = appId;
+	}
+	public String getIs_lost() {
+		return is_lost;
+	}
+	public void setIs_lost(String is_lost) {
+		this.is_lost = is_lost;
+	}
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
 	}
 	
 	
