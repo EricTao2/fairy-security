@@ -51,4 +51,8 @@ public interface SecurityConstants {
 	 * 默认：session过期跳转rul
 	 */
 	String DEFAULT_SESSION_INVALID_URL = "/fairy-session-invalid.html";
+	/**
+	 * 默认：注册跳转url
+	 */
+	String DEFAULT_SIGNUpUrl_PAGE_URL = "/fairy-signUp.html";
 }

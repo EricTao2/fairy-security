@@ -14,7 +14,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.fairy.security.core.properties.LoginType;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,26 +24,23 @@ public class FairyAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 	
 	private ObjectMapper objectMapper = new ObjectMapper();
 	
-	private LoginType loginType;
-	
 	/**
 	 * 
 	 */
-	public FairyAuthenticationSuccessHandler(LoginType loginType) {
+	public FairyAuthenticationSuccessHandler() {
 		super();
-		this.loginType = loginType;
 	}
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		logger.info("登录成功");
-		
-		if (LoginType.JSON.equals(loginType)) {
+		String accept =request.getHeader("accept");
+		if (accept.contains("text/html")) {
+			super.onAuthenticationSuccess(request, response, authentication);
+		} else {
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().write(objectMapper.writeValueAsString(authentication));
-		} else {
-			super.onAuthenticationSuccess(request, response, authentication);
 		}
 		
 	}

@@ -92,9 +92,11 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 			.authorizeRequests()
 				.antMatchers(SecurityConstants.DEFAULT_FORM_LOGIN_URL, 
 					SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-					securityProperties.getBrowser().getLoginPage(),
+					securityProperties.getBrowser().getLoginUrl(),
 					securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
-					securityProperties.getBrowser().getLogoutUrl())
+					securityProperties.getBrowser().getLogoutUrl(),
+					securityProperties.getBrowser().getSignUpUrl(),
+					"/user/register")
 			.permitAll()
 				.and().authorizeRequests().anyRequest().authenticated()
 				.and().csrf().disable();

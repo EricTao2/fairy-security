@@ -6,28 +6,22 @@ public class BrowserProperties {
 	
 	private SessionProperties session = new SessionProperties();
 	
-	private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
+	private String loginUrl = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
 
 	private String logoutUrl = SecurityConstants.DEFAULT_LOGOUT_PAGE_URL;
 	
-	private LoginType loginType = LoginType.JSON;
+	private String signUpUrl = SecurityConstants.DEFAULT_SIGNUpUrl_PAGE_URL;
 		
 	private int rememberMeSeconds = 60 * 60 * 24;
 	
-	public String getLoginPage() {
-		return loginPage;	
+
+
+	public String getLoginUrl() {
+		return loginUrl;
 	}
 
-	public void setLoginPage(String loginPage) {
-		this.loginPage = loginPage;
-	}
-
-	public LoginType getLoginType() {
-		return loginType;
-	}
-
-	public void setLoginType(LoginType loginType) {
-		this.loginType = loginType;
+	public void setLoginUrl(String loginUrl) {
+		this.loginUrl = loginUrl;
 	}
 
 	public int getRememberMeSeconds() {
@@ -52,6 +46,14 @@ public class BrowserProperties {
 
 	public void setLogoutUrl(String logoutUrl) {
 		this.logoutUrl = logoutUrl;
+	}
+
+	public String getSignUpUrl() {
+		return signUpUrl;
+	}
+
+	public void setSignUpUrl(String signUpUrl) {
+		this.signUpUrl = signUpUrl;
 	}
 	
 	

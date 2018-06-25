@@ -14,8 +14,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.ServletWebRequest;
 
-import com.fairy.security.core.properties.LoginType;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.support.SimpleResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,15 +27,13 @@ public class FairyAuthenticationFailureHandler extends SimpleUrlAuthenticationFa
 	
 	private ObjectMapper objectMapper = new ObjectMapper();
 	
-	private LoginType loginType;
 	
 
 	/**
 	 * 
 	 */
-	public FairyAuthenticationFailureHandler(String defaultFailureUrl, LoginType loginType) {
+	public FairyAuthenticationFailureHandler(String defaultFailureUrl) {
 		super(defaultFailureUrl);
-		this.loginType = loginType;
 	}
 	
 	@Override
@@ -43,12 +41,13 @@ public class FairyAuthenticationFailureHandler extends SimpleUrlAuthenticationFa
 			AuthenticationException exception) throws IOException, ServletException {
 		logger.info("登录失败");
 		response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-		if (LoginType.JSON.equals(loginType)) {
+		String accept =request.getHeader("accept");
+		if (accept.contains("text/html")) {
+			super.onAuthenticationFailure(request, response, exception);
+		} else {
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(exception.getMessage())));
 
-		} else {
-			super.onAuthenticationFailure(request, response, exception);
 		}
 
 	}
