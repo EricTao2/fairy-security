@@ -20,7 +20,11 @@ import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.support.SimpleResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+/**
+ * 登录校验失败的处理
+ * @author Administrator
+ *
+ */
 public class FairyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -33,7 +37,7 @@ public class FairyAuthenticationFailureHandler extends SimpleUrlAuthenticationFa
 	 * 
 	 */
 	public FairyAuthenticationFailureHandler(String defaultFailureUrl) {
-		super(defaultFailureUrl);
+		super(defaultFailureUrl+"?error=true");
 	}
 	
 	@Override

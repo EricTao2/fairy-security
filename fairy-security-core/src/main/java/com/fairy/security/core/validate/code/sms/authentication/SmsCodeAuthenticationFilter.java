@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
-import com.fairy.security.core.authentication.common.SecurityConstants;
+import com.fairy.security.core.authentication.common.SecurityCoreConstants;
 
 /**
  * SMS登录验证的Filter，并由SmsCodeAuthenticationSecurityConfig类配置
@@ -34,7 +34,7 @@ public class SmsCodeAuthenticationFilter  extends AbstractAuthenticationProcessi
 		// ===================================================================================================
 
 		public SmsCodeAuthenticationFilter() {
-			super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_SMS_LOGIN_PROCESSING_URL, "POST"));
+			super(new AntPathRequestMatcher(SecurityCoreConstants.DEFAULT_SMS_LOGIN_PROCESSING_URL, "POST"));
 		}
 
 		// ~ Methods

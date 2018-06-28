@@ -3,7 +3,7 @@
  */
 package com.fairy.security.core.properties;
 
-import com.fairy.security.core.authentication.common.SecurityConstants;
+import com.fairy.security.core.authentication.common.SecurityCoreConstants;
 
 /**
  * @author Administrator
@@ -18,7 +18,7 @@ public class SessionProperties {
 	/**
 	 * session失效默认跳转url
 	 */
-	private String sessionInvalidUrl = SecurityConstants.DEFAULT_SESSION_INVALID_URL;
+	private String sessionInvalidUrl = SecurityCoreConstants.DEFAULT_SESSION_INVALID_URL;
 	
 	public int getMaximumSessions() {
 		return maximumSessions;

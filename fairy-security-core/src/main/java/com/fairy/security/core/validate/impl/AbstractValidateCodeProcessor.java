@@ -10,7 +10,7 @@ import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
-import com.fairy.security.core.authentication.common.SecurityConstants;
+import com.fairy.security.core.authentication.common.SecurityCoreConstants;
 import com.fairy.security.core.validate.code.ValidateCode;
 import com.fairy.security.core.validate.code.ValidateCodeException;
 import com.fairy.security.core.validate.code.ValidateCodeGenerator;
@@ -69,7 +69,7 @@ public abstract class AbstractValidateCodeProcessor<T extends ValidateCode> impl
 	 * @throws
 	 */
 	private String getProcessorType(ServletWebRequest request) {
-		return StringUtils.substringAfter(request.getRequest().getRequestURI(), SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/");
+		return StringUtils.substringAfter(request.getRequest().getRequestURI(), SecurityCoreConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX+"/");
 	}
 
 	/**

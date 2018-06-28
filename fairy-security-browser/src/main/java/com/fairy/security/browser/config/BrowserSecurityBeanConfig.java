@@ -47,14 +47,14 @@ public class BrowserSecurityBeanConfig {
 	@Bean
 	@ConditionalOnMissingBean(LogoutSuccessHandler.class)
 	public LogoutSuccessHandler logoutSuccessHandler(){
-		return new FairyLogoutSuccessHandler(securityProperties.getBrowser().getLogoutUrl());
+		return new FairyLogoutSuccessHandler(securityProperties.getBrowser().getLogoutSuccessUrl());
 	}
 	
 	
 	@Bean
 	@ConditionalOnMissingBean(SavedRequestAwareAuthenticationSuccessHandler.class)
 	public SavedRequestAwareAuthenticationSuccessHandler savedRequestAwareAuthenticationSuccessHandler(){
-		return new FairyAuthenticationSuccessHandler();
+		return new FairyAuthenticationSuccessHandler(securityProperties.getBrowser().getLoginUrl());
 	}
 	
 	@Bean

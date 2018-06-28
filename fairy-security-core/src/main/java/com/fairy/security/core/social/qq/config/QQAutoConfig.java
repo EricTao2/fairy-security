@@ -20,7 +20,7 @@ import com.fairy.security.core.social.qq.connect.QQConnectionFactory;
  *
  */
 @Configuration
-@ConditionalOnProperty(prefix = "fairy.security.social.qq", name = "app-id")
+@ConditionalOnProperty(prefix = "fairy.security.social.qq", name = "appId")
 public class QQAutoConfig extends SocialAutoConfigurerAdapter {
 
 	@Autowired

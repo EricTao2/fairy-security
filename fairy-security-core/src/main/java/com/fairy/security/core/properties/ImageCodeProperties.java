@@ -1,6 +1,6 @@
 package com.fairy.security.core.properties;
 
-import com.fairy.security.core.authentication.common.SecurityConstants;
+import com.fairy.security.core.authentication.common.SecurityCoreConstants;
 
 public class ImageCodeProperties extends SmsCodeProperties {
 	
@@ -12,7 +12,7 @@ public class ImageCodeProperties extends SmsCodeProperties {
 	
 	public ImageCodeProperties(){
 		setLength(4);
-		setUrl(SecurityConstants.DEFAULT_FORM_LOGIN_PROCESSING_URL);
+		setUrl(SecurityCoreConstants.DEFAULT_FORM_LOGIN_PROCESSING_URL);
 	}
 
 	public int getWidth() {

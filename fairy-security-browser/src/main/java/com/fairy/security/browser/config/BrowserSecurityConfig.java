@@ -22,7 +22,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
 import com.fairy.security.browser.authentication.FairyAuthenticationFailureHandler;
 import com.fairy.security.browser.authentication.FairyAuthenticationSuccessHandler;
 import com.fairy.security.browser.session.FairyExpiredSessionStrategy;
-import com.fairy.security.core.authentication.common.SecurityConstants;
+import com.fairy.security.core.authentication.common.SecurityCoreConstants;
 import com.fairy.security.core.config.AbstractChannelSecurityConfig;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.validate.code.ValidateCodeFilter;
@@ -90,11 +90,11 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 				.deleteCookies("JSESSIONID")
 				.and()
 			.authorizeRequests()
-				.antMatchers(SecurityConstants.DEFAULT_FORM_LOGIN_URL, 
-					SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
+				.antMatchers(SecurityCoreConstants.DEFAULT_FORM_LOGIN_URL, 
+					SecurityCoreConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
 					securityProperties.getBrowser().getLoginUrl(),
 					securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
-					securityProperties.getBrowser().getLogoutUrl(),
+					securityProperties.getBrowser().getLogoutSuccessUrl(),
 					securityProperties.getBrowser().getSignUpUrl(),
 					"/user/register")
 			.permitAll()

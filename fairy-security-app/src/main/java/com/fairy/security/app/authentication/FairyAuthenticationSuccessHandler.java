@@ -26,7 +26,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.fairy.security.core.properties.LoginType;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

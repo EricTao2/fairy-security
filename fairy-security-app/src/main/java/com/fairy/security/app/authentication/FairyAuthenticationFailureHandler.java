@@ -15,7 +15,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-import com.fairy.security.core.properties.LoginType;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

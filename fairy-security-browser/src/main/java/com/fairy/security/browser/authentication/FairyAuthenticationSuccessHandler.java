@@ -17,7 +17,11 @@ import org.springframework.stereotype.Component;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+/**
+ * 登录成功的处理
+ * @author Administrator
+ *
+ */
 public class FairyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -27,8 +31,9 @@ public class FairyAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 	/**
 	 * 
 	 */
-	public FairyAuthenticationSuccessHandler() {
+	public FairyAuthenticationSuccessHandler(String defaultSuccessUrl) {
 		super();
+		setDefaultTargetUrl(defaultSuccessUrl);
 	}
 	
 	@Override

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 
-import com.fairy.security.core.authentication.common.SecurityConstants;
+import com.fairy.security.core.authentication.common.SecurityCoreConstants;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.social.support.SocialUserInfo;
 import com.fairy.security.core.support.SimpleResponse;
@@ -42,7 +42,7 @@ public class BrowserSecurityController {
 	@Autowired
 	private ProviderSignInUtils providerSignInUtils;
 	
-	@RequestMapping(SecurityConstants.DEFAULT_FORM_LOGIN_URL)
+	@RequestMapping(SecurityCoreConstants.DEFAULT_FORM_LOGIN_URL)
 	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
 	public String requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
