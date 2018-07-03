@@ -24,7 +24,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 import com.fairy.security.core.authentication.common.SecurityCoreConstants;
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.social.support.SocialUserInfo;
-import com.fairy.security.core.support.SimpleResponse;
 
 @RestController
 public class BrowserSecurityController {

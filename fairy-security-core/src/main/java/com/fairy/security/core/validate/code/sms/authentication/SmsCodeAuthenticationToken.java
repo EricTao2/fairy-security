@@ -6,7 +6,6 @@ package com.fairy.security.core.validate.code.sms.authentication;
 import java.util.Collection;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 

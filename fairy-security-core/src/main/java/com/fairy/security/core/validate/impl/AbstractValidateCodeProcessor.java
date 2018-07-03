@@ -16,7 +16,6 @@ import com.fairy.security.core.validate.code.ValidateCodeException;
 import com.fairy.security.core.validate.code.ValidateCodeGenerator;
 import com.fairy.security.core.validate.code.ValidateCodeProcessor;
 import com.fairy.security.core.validate.code.ValidateCodeType;
-import com.fairy.security.core.validate.code.image.ImageCode;
 
 /**
  * 抽象的验证码处理器，根据验证码生成器调用验证码的生成方法，生成验证码存入sessio，并返回验证码。

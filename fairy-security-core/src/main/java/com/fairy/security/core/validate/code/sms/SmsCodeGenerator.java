@@ -1,8 +1,6 @@
 package com.fairy.security.core.validate.code.sms;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import com.fairy.security.core.properties.SecurityProperties;

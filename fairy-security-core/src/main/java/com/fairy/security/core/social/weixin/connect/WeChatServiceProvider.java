@@ -4,8 +4,6 @@
 package com.fairy.security.core.social.weixin.connect;
 
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
-import org.springframework.social.oauth2.OAuth2Template;
-
 import com.fairy.security.core.social.wechat.api.WeChat;
 import com.fairy.security.core.social.wechat.api.WeiXinImpl;
 
