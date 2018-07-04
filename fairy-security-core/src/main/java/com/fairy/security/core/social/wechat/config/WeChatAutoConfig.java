@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fairy.security.core.social.weixin.config;
+package com.fairy.security.core.social.wechat.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -11,7 +11,7 @@ import org.springframework.social.connect.ConnectionFactory;
 
 import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.properties.WeChatProperties;
-import com.fairy.security.core.social.weixin.connect.WeChatConnectionFactory;
+import com.fairy.security.core.social.wechat.connect.WeChatConnectionFactory;
 
 /**
  * @author Administrator

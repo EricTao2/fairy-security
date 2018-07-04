@@ -55,7 +55,8 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	/**
 	 * 
 	 * @Title: fairySpringSocialConfigurer   
-	 * @Description: 配置：处理第三方登录url的前缀。默认为"/fairyAuth"  
+	 * @Description: 配置：处理第三方登录url的前缀。默认为"/fairyAuth".
+	 * 配置:第三方登录时的注册页面
 	 * @param: @return      
 	 * @return: SpringSocialConfigurer      
 	 * @throws

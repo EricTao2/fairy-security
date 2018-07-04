@@ -23,6 +23,11 @@ public class DemoController {
 	@Autowired
 	private ProviderSignInUtils providerSignInUtils;
 	
+	@GetMapping("")
+	public String index(){
+		return "index";
+	}
+	
 	@GetMapping("hello")
 	public String hello(){
 		return "hello";

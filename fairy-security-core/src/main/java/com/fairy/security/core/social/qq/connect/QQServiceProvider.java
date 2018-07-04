@@ -4,6 +4,7 @@
 package com.fairy.security.core.social.qq.connect;
 
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
+
 import com.fairy.security.core.social.qq.api.QQ;
 import com.fairy.security.core.social.qq.api.QQImpl;
 

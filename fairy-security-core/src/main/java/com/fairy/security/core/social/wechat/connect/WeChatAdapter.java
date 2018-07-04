@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fairy.security.core.social.weixin.connect;
+package com.fairy.security.core.social.wechat.connect;
 
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;

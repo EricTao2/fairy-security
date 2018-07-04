@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fairy.security.core.social.weixin.connect;
+package com.fairy.security.core.social.wechat.connect;
 
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 import com.fairy.security.core.social.wechat.api.WeChat;

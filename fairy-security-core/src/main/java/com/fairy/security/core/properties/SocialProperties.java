@@ -11,6 +11,7 @@ import com.fairy.security.core.authentication.common.SecurityCoreConstants;
  */
 public class SocialProperties {
 	
+	
 	private String filterProcessesUrl = SecurityCoreConstants.DEFAULT_SOCIAL_PROCESSING_URL_PREFIX;
 
 	private QQProperties qq = new QQProperties();

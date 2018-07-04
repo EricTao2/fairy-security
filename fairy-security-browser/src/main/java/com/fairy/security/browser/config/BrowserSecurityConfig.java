@@ -88,6 +88,8 @@ public class BrowserSecurityConfig extends AbstractChannelSecurityConfig {
 					securityProperties.getBrowser().getSession().getSessionInvalidUrl(),
 					securityProperties.getBrowser().getLogoutSuccessUrl(),
 					securityProperties.getBrowser().getSignUpUrl(),
+					//这里要注释掉的
+					"localhost",
 					"/user/register")
 			.permitAll()
 				.and().authorizeRequests().anyRequest().authenticated()

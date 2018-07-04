@@ -8,11 +8,16 @@ import java.nio.charset.Charset;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import com.fairy.security.core.properties.SecurityProperties;
 
 /**
  * 对SpringSocial的OAuth2Template类进行修改
@@ -22,6 +27,8 @@ import org.springframework.web.client.RestTemplate;
  *
  */
 public class QQOAuth2Template extends OAuth2Template {
+	
+	
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	/**
@@ -59,5 +66,23 @@ public class QQOAuth2Template extends OAuth2Template {
 		Long  expiresIn = new Long(StringUtils.substringAfterLast(items[1], "="));
 		String  refreshToken = StringUtils.substringAfterLast(items[2], "=");
 		return new AccessGrant(accessToken, null, refreshToken, expiresIn);
+	}
+	
+	/**
+	 * 覆写:生成引导用户跳转获取code的url(微信互联没有完全遵守oauth2标准,按照微信的标准进行修改)
+	 */
+	@Override
+	public String buildAuthenticateUrl(OAuth2Parameters parameters) {
+		String url = super.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, parameters);
+		if (StringUtils.contains(url, "redirect_uri=")) {
+			String as =  securityProperties.getSocial().getFilterProcessesUrl();
+			url = url.replaceAll("(?<=redirect_uri=.{1,1000}?%2F)connect(?=%2F.{1,1000}=)", securityProperties.getSocial().getFilterProcessesUrl());
+		}
+		return url;
+	}
+	
+	@Override
+	public String buildAuthorizeUrl(OAuth2Parameters parameters) {
+		return this.buildAuthenticateUrl(parameters);
 	}
 }
