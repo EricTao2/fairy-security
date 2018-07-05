@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
+<title>default-social-binding</title>
+</head>
+<body>
+	<h1>fairy-security默认社交账号绑定页面</h1>
+	<form action="/connect/qq" method="post">
+		<button onclick="submit">绑定qq</button>
+	</form>
+	
+	<button onclick="submit()">解绑qq</button>
+</body>
+<script> 
+	function submit() {
+		$.ajax({
+			  type: 'DELETE',
+			  url: "/connect/qq",
+			  success: function (data, status) {
+				    console.log(data)
+				  },
+			  fail: function (err, status) {
+				    console.log(err)
+				}
+			});
+	}
+</script>
+</html>
