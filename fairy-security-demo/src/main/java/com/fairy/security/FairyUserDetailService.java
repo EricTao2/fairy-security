@@ -16,10 +16,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class FairyUserDetailService implements UserDetailsService, SocialUserDetailsService {
 
-	@Autowired
+
 	private PasswordEncoder passwordEncoder;
 	private Logger logger = LoggerFactory.getLogger(FairyUserDetailService.class);
-	
+
+
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		logger.info("表单登录用户名：" + userName);
@@ -35,8 +36,15 @@ public class FairyUserDetailService implements UserDetailsService, SocialUserDet
 	
 	private SocialUserDetails buildUser(String userName) {
 		String password = passwordEncoder.encode("123123");
-		SocialUser user = new SocialUser(userName, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
-		return user;
+		return new SocialUser(userName, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
+
 	}
 
+    public PasswordEncoder getPasswordEncoder() {
+        return passwordEncoder;
+    }
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 }
