@@ -49,7 +49,8 @@ public class BrowserSecurityController {
 		if (savedRequest != null) {
 			String target = savedRequest.getRedirectUrl();
 			logger.info("引发跳转的url是" + target);
-			if (StringUtils.endsWithIgnoreCase(target, ".html")) {
+			//这里鉴别返回html还是json
+			if (true) {
 				defaultRedirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginUrl());
 			}
 		}

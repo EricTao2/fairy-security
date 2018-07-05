@@ -7,6 +7,7 @@ import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 /**
+ * 配置:第三方授权的拦截url前缀
  * @author Administrator
  *
  */

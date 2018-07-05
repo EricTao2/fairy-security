@@ -42,6 +42,7 @@ public class QQOAuth2Template extends OAuth2Template {
 		setUseParametersForClientAuthentication(true);
 	}
 
+
 	/* (non-Javadoc)
 	 * @see org.springframework.social.oauth2.OAuth2Template#createRestTemplate()
 	 */
@@ -68,21 +69,5 @@ public class QQOAuth2Template extends OAuth2Template {
 		return new AccessGrant(accessToken, null, refreshToken, expiresIn);
 	}
 	
-	/**
-	 * 覆写:生成引导用户跳转获取code的url(微信互联没有完全遵守oauth2标准,按照微信的标准进行修改)
-	 */
-	@Override
-	public String buildAuthenticateUrl(OAuth2Parameters parameters) {
-		String url = super.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, parameters);
-		if (StringUtils.contains(url, "redirect_uri=")) {
-			String as =  securityProperties.getSocial().getFilterProcessesUrl();
-			url = url.replaceAll("(?<=redirect_uri=.{1,1000}?%2F)connect(?=%2F.{1,1000}=)", securityProperties.getSocial().getFilterProcessesUrl());
-		}
-		return url;
-	}
 	
-	@Override
-	public String buildAuthorizeUrl(OAuth2Parameters parameters) {
-		return this.buildAuthenticateUrl(parameters);
-	}
 }

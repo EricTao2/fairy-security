@@ -4,7 +4,9 @@
 package com.fairy.security.core.social.qq.connect;
 
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
+import org.springframework.social.oauth2.OAuth2Operations;
 
+import com.fairy.security.core.properties.SecurityProperties;
 import com.fairy.security.core.social.qq.api.QQ;
 import com.fairy.security.core.social.qq.api.QQImpl;
 
@@ -32,7 +34,8 @@ public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
 		this.appId = appId;
 	}
 
-	
+
+
 	@Override
 	public QQ getApi(String accessToken) {
 		return new QQImpl(accessToken, appId);
